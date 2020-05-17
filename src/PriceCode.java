@@ -11,7 +11,7 @@ public enum PriceCode {
             return daysRented * 3;
         }
     },
-    CHILDRENS {
+    CHILDREN {
         @Override
         double getCharge(int daysRented) {
             return (daysRented > 3) ? 1.5 + (daysRented - 3) * 1.5 : 1.5;
