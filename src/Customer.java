@@ -20,13 +20,6 @@ class Customer {
     }
 
     public String statement() {
-        double totalAmount = rentals.stream()
-                                    .mapToDouble(Rental::getCharge)
-                                    .sum();
-        int frequentRenterPoints = rentals.stream()
-                                          .mapToInt(Rental::getFrequentRenterPoints)
-                                          .sum();
-
         String result = "Rental Record for " + this.getName() + "\n";
         result += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
         result += rentals.stream()
@@ -34,9 +27,21 @@ class Customer {
                          .collect(Collectors.joining());
 
         //add footer lines
-        result += "Amount owed is " + totalAmount + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points";
+        result += "Amount owed is " + getTotalCharge() + "\n";
+        result += "You earned " + getFrequentRenterPoints() + " frequent renter points";
         return result;
+    }
+
+    private int getFrequentRenterPoints() {
+        return rentals.stream()
+                      .mapToInt(Rental::getFrequentRenterPoints)
+                      .sum();
+    }
+
+    private double getTotalCharge() {
+        return rentals.stream()
+                      .mapToDouble(Rental::getCharge)
+                      .sum();
     }
 }
     
