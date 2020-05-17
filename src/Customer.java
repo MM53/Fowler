@@ -21,7 +21,10 @@ class Customer {
 
     public String statement() {
         double totalAmount = 0;
-        int frequentRenterPoints = 0;
+
+        int frequentRenterPoints = rentals.stream()
+                                          .mapToInt(Rental::getFrequentRenterPoints)
+                                          .sum();
         String result = "Rental Record for " + this.getName() + "\n";
         result += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
         result += rentals.stream()
@@ -29,8 +32,6 @@ class Customer {
                          .collect(Collectors.joining());
 
         for (Rental each : rentals) {
-            //show figures for this rental
-            frequentRenterPoints += each.getFrequentRenterPoints();
 
             totalAmount += each.getCharge();
         }
