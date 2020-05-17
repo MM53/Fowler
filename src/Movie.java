@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class Movie {
@@ -30,5 +29,12 @@ public class Movie {
 
     public double getCharge(int daysRented) {
         return priceCode.getCharge(daysRented);
+    }
+
+    public int getFrequentRenterPoints(int daysRented) {
+        if ((priceCode == PriceCode.NEW_RELEASE) && daysRented > 1) {
+            return 2;
+        }
+        return 1;
     }
 }
