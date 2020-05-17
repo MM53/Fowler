@@ -1,0 +1,6 @@
+# exclude intellij files
+.idea
+*.iml
+
+# exclude build output
+out
