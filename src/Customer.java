@@ -1,6 +1,7 @@
 
 import java.lang.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 class Customer {
     private String name;
@@ -23,11 +24,14 @@ class Customer {
         int frequentRenterPoints = 0;
         String result = "Rental Record for " + this.getName() + "\n";
         result += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
+        result += rentals.stream()
+                         .map(rental -> "\t" + rental.getMovie().getTitle() + "\t" + "\t" + rental.getDaysRented() + "\t" + rental.getCharge() + "\n")
+                         .collect(Collectors.joining());
 
         for (Rental each : rentals) {
             //show figures for this rental
             frequentRenterPoints += each.getFrequentRenterPoints();
-            result += "\t" + each.getMovie().getTitle() + "\t" + "\t" + each.getDaysRented() + "\t" + each.getCharge() + "\n";
+
             totalAmount += each.getCharge();
         }
         //add footer lines
